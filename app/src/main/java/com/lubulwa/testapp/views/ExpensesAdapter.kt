@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import com.lubulwa.testapp.databinding.ItemExpenseBinding
 import com.lubulwa.testapp.model.Expense
 
-class ExpensesAdapter : ListAdapter<Expense, ExpenseViewHolder>(DIFF_CALLBACK) {
+class ExpensesAdapter(private val onItemClickListener: OnItemClickListener,
+                      private val onItemLongClickListener: OnItemLongClickListener
+) : ListAdapter<Expense, ExpenseViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder =
         ExpenseViewHolder (
@@ -15,7 +17,15 @@ class ExpensesAdapter : ListAdapter<Expense, ExpenseViewHolder>(DIFF_CALLBACK) {
         )
 
 
-    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) = holder.bind(getItem(position))
+    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) = holder.bind(getItem(position), onItemClickListener, onItemLongClickListener)
+
+    interface OnItemClickListener {
+        fun onItemClicked(expense: Expense)
+    }
+
+    interface OnItemLongClickListener {
+        fun onItemLongClicked(expense: Expense)
+    }
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Expense>() {

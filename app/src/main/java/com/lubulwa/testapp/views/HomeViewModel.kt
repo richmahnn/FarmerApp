@@ -46,4 +46,20 @@ class HomeViewModel @Inject constructor(private val expensesRepository: Expenses
         }
     }
 
+    fun deleteExpense(expense: Expense) {
+        viewModelScope.launch {
+            expensesRepository.deleteExpense(expense).collect {
+                _deleteExpensesLiveData.value = it
+            }
+        }
+    }
+
+    fun updateExpense(expense: Expense) {
+        viewModelScope.launch {
+            expensesRepository.updateExpense(expense).collect {
+                _updateExpensesLiveData.value = it
+            }
+        }
+    }
+
 }
