@@ -14,7 +14,8 @@ import javax.inject.Singleton
     ViewModelFactoryModule::class,
     ViewModelFactoryModule::class,
     DbModule::class,
-    ViewModelModule::class
+    ViewModelModule::class,
+    ActivityBuilder::class
 ])
 interface AppComponent : AndroidInjector<FarmerApp> {
 

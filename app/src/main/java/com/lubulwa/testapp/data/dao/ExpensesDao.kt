@@ -17,6 +17,6 @@ interface ExpensesDao {
     fun getExpenses(): Flow<List<Expense>>
 
     @Delete
-    fun deleteExpense(expense: Expense)
+    fun deleteExpense(expense: Expense): Int
 
 }

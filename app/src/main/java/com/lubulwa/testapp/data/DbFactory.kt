@@ -13,9 +13,11 @@ abstract class DbFactory : RoomDatabase() {
     abstract fun getExpensesDao(): ExpensesDao
 
     companion object {
+
+        @Volatile
         private var DbINSTANCE: DbFactory? = null
 
-        fun getInstance(context: Context): DbFactory? {
+        fun getInstance(context: Context): DbFactory {
 
             val tempInstance = DbINSTANCE
             if (tempInstance != null) {
